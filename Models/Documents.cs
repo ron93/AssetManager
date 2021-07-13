@@ -8,18 +8,18 @@ namespace DocumentUpoadAPI.Models
 {
     public class Document
     {
-        public int Id;
+        public int Id { get; set; }
         [Required]
         [StringLength(30, MinimumLength =3)]
-        public string Name;
+        public string Name { get; set; }
 
         [Required]
         [StringLength(100, MinimumLength =5)]
-        public string Description;
+        public string Description { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime UploadDate { get; set; }
-        public string Path;
+        public string Path { get; set; }
 
     }
 }
