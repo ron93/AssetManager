@@ -32,7 +32,9 @@ namespace DocumentUpoadAPI
             //register instance of document repository
             services.AddScoped<IDocumentRepository, DocumentRepository>();
             //Document context dependecy injection with db connection string
-            services.AddDbContext<DocumentContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DocumentDatabase")));
+            services.AddDbContext<DocumentContext>(o => o.UseSqlServer(
+                Configuration.GetConnectionString("DocumentDatabase"),
+                b => b.MigrationsAssembly(typeof(DocumentContext).Assembly.FullName)));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
