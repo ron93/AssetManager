@@ -33,7 +33,7 @@ namespace DocumentUpoadAPI.Repositories
         //get one document
         public async Task<Document> GetDocument(int id)
         {
-            return await _context.Documents.FindAsync();
+            return await _context.Documents.FindAsync(id);
         }
 
         //get all documents
