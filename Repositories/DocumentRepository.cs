@@ -13,37 +13,59 @@ namespace DocumentUpoadAPI.Repositories
         {
             _context = context;
         }
-        //create
-        public async Task<Document> Create(Document document)
+
+        public async Task<DocumentOnDatabase> Create(DocumentOnDatabase document)
         {
-            _context.Documents.Add(document);
+          _context.Documents.Add(document);
             await _context.SaveChangesAsync();
 
             return document;
-
         }
-        //delete
+
+        public async Task<DocumentOnFileSystem> Create(DocumentOnFileSystem document)
+        {
+              _context.Documents.Add(document);
+            await _context.SaveChangesAsync();
+
+            return document;
+        }
+
         public async Task Delete(int id)
         {
-            var documentToDelete = await _context.Documents.FindAsync(id);
+             var documentToDelete = await _context.Documents.FindAsync(id);
             _context.Documents.Remove(documentToDelete);
             await _context.SaveChangesAsync();
         }
 
-        //get one document
-        public async Task<Document> GetDocument(int id)
+        public async Task<IEnumerable<DocumentOnDatabase>> GetallDb()
         {
-            return await _context.Documents.FindAsync(id);
+            return await _context.Documents.ToListAsync();
+
         }
 
-        //get all documents
-        public async Task<IEnumerable<Document>> GetDocuments()
+        public async Task<IEnumerable<DocumentOnFileSystem>> GetAllFile()
+        {
+            return await _context.Documents.ToListAsync();
+
+        }
+
+        public async Task<DocumentOnDatabase> GetOneDb(int id)
         {
             return await _context.Documents.ToListAsync();
         }
 
-        //update document
-        public async Task Update(Document document)
+        public async Task<DocumentOnFileSystem> GetOneFile(int id)
+        {
+            return await _context.Documents.FindAsync(id);
+        }
+
+        public async Task Update(DocumentOnDatabase document)
+        {
+            _context.Entry(document).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Update(DocumentOnFileSystem document)
         {
             _context.Entry(document).State = EntityState.Modified;
             await _context.SaveChangesAsync();
