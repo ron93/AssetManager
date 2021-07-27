@@ -7,19 +7,27 @@ namespace DocumentUpoadAPI.Repositories
 {
     public interface IDocumentRepository 
     {
-        //task to get all documents
-        Task<IEnumerable<Document>> GetDocuments();
+        //get all books
+        Task<IEnumerable<DocumentOnDatabase>> GetallDb();
+        Task<IEnumerable<DocumentOnFileSystem>> GetAllFile();
 
-        //task to get a document
-        Task<Document> GetDocument(int id);
+        //get one book
+        Task<DocumentOnDatabase> GetOneDb(int id);
+        Task<DocumentOnFileSystem> GetOneFile(int id);
 
-        //task to create a document
-        Task<Document> Create(Document document);
+        //create a book
+        Task<DocumentOnDatabase> Create(DocumentOnDatabase document);
+        Task<DocumentOnFileSystem> Create(DocumentOnFileSystem document);
 
-        //task to update a document
-        Task Update(Document document);
+        //update a book
+        Task Update(DocumentOnDatabase document);
+        Task Update(DocumentOnFileSystem document);
 
-        //task to delete a document
+        //delete a book
         Task Delete(int id);
+        
+        
+    }
+       
     }
 }
